@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-from string import ascii_uppercase as A; print(A)
+from string import ascii_uppercase
+print("".join(ascii_uppercase))
