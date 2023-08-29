@@ -11,7 +11,7 @@ class Square:
         __position (tuple): private instance attribute, stores positons
 
     """
-    
+
     def __init__(self, size=0, position=(0, 0)):
         """
         Initializes a new instance of the square class.
@@ -28,7 +28,7 @@ class Square:
     def size(self):
         """
         Getter method for size att
-        
+
         Returns: int
         """
 
