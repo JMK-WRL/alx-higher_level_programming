@@ -2,6 +2,7 @@
 
 """ create an empty square """
 
+
 class Square:
     """ Represents a square """
     pass
