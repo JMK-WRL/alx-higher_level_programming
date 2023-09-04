@@ -4,7 +4,7 @@
 
 class Rectangle:
     """Represents a rectangle"""
-    
+
     def __init__(self, width=0, height=0):
         """Initializes a new rectangle."""
 
@@ -14,7 +14,7 @@ class Rectangle:
     @property
     def width(self):
         """Getter for width"""
-        
+
         return self.__width
 
     @width.setter
