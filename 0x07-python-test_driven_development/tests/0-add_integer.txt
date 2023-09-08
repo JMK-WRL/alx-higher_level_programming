@@ -1,4 +1,5 @@
 # Test case for add_integer function
+>>> add_integer = __import__('0-add_integer').add_integer
 
 # Test case 1: Adding two positive integers
 >>> add_integer(5, 3)
