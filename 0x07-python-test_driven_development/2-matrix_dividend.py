@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 2-matrix_dividend.py
+#2-matrix_divided.py
 """ Defines a matrix division function"""
 
 
