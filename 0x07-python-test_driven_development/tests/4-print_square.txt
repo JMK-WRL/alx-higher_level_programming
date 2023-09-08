@@ -1,0 +1,36 @@
+# Test cases for print_square function
+>>> from print_square import print_square
+
+# Test case 1: Print a square of size 4
+>>> print_square(4)
+####
+####
+####
+####
+
+# Test case 2: Print a square of size 10
+>>> print_square(10)
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+
+# Test case 3: Print a square of size 0 (no output expected)
+>>> print_square(0)
+<no output>
+
+# Test case 4: Print a square of size 1
+>>> print_square(1)
+#
+
+# Test case 5: Attempt to print a square of size -1 (should raise a ValueError)
+>>> print_square(-1)
+Traceback (most recent call last):
+    ...
+ValueError: size must be >= 0
