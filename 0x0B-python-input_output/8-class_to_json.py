@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""Defines the function class to json"""
+
+
 def class_to_json(obj):
     """
     Return a dictionary description of an object with serializable attributes.
