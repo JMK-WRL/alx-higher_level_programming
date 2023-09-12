@@ -10,4 +10,3 @@ def lookup(obj):
         obj(object): the object to inspect
     """
     return dir(obj)
-
