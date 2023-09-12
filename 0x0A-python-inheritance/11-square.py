@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""class square"""
+"""Module to inherit from a rectangle
+"""
 
 
 class Square(Rectangle):
