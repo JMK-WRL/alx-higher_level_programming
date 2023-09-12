@@ -12,16 +12,17 @@ def to_json_string(my_obj):
     """
     return json.dumps(my_obj)
 
+
 if __name__ == "__main__":
     my_list = [1, 2, 3]
     s_my_list = to_json_string(my_list)
     print(s_my_list)
     print(type(s_my_list))
 
-    my_dict = { 
+    my_dict = {
         'id': 12,
         'name': "John",
-        'places': [ "San Francisco", "Tokyo" ],
+        'places': ["San Francisco", "Tokyo"],
         'is_active': True,
         'info': {
             'age': 36,
@@ -33,7 +34,7 @@ if __name__ == "__main__":
     print(type(s_my_dict))
 
     try:
-        my_set = { 132, 3 }
+        my_set = {132, 3}
         s_my_set = to_json_string(my_set)
         print(s_my_set)
         print(type(s_my_set))
