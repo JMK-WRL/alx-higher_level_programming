@@ -1,5 +1,6 @@
-#1/usr/bin/python3
+#!/usr/bin/python3
 """class defines mylist"""
+
 
 class MyList(list):
     def print_sorted(self):
