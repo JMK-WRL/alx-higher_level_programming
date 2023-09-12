@@ -22,12 +22,12 @@ class Rectangle(BaseGeometry):
         def area(self):
             """Calculates the area of the rectangle
 
-                Returns: 
+                Returns:
                     int: the area of the rectangle
             """
 
             return self.__width * self.__height
-        
+
         def __str__(self):
             """
             Return a string representation of the rectangle
