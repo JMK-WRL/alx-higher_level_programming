@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Method rectangle"""
+"""Method defines a class rectangle"""
 
 
 class Rectangle(BaseGeometry):
