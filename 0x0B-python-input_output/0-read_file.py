@@ -12,5 +12,6 @@ def read_file(filename=""):
         for line in file:
             print(line, end='')
 
+
 if __name__ == "__main__":
     read_file("my_file_0.txt")
