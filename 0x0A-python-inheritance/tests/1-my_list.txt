@@ -1,0 +1,36 @@
+# Test case 1: Creating an empty MyList
+>>> my_list = MyList()
+>>> len(my_list)
+0
+
+# Test case 2: Appending elements to MyList
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> len(my_list)
+5
+
+# Test case 3: Printing the original list
+>>> my_list
+[1, 4, 2, 3, 5]
+
+# Test case 4: Printing the sorted list using print_sorted method
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+# Test case 5: Verifying that the original list remains unchanged
+>>> my_list
+[1, 4, 2, 3, 5]
+
+# Test case 6: Sorting an empty MyList
+>>> empty_list = MyList()
+>>> empty_list.print_sorted()
+[]
+
+# Test case 7: Sorting a MyList with a single element
+>>> single_element_list = MyList()
+>>> single_element_list.append(10)
+>>> single_element_list.print_sorted()
+[10]
