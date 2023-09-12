@@ -4,7 +4,7 @@
 
 class Rectangle(BaseGeometry):
     """Class of a Rectangle"""
-    
+
     def __init__(self, width, height):
         """
         Initialize a rectangle Instance
