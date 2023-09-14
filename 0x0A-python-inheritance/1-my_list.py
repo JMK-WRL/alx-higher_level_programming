@@ -1,10 +1,19 @@
 #!/usr/bin/python3
-"""class defines mylist"""
+"""Function prints the lists inherited
+"""
 
 
 class MyList(list):
+    """child class of list
+    """
     def print_sorted(self):
-        """Print the list in asceding order that is sorted"""
-
-        sorted_list = sorted(self)
-        print(sorted_list)
+        """
+        Module to sort a list
+        """
+        print(sorted(self.copy()))
+        """
+        => This is another solution for:
+        new_list = list.copy(self)
+        list.sort(new_list)
+        print(new_list)
+        """
