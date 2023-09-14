@@ -1,36 +1,47 @@
-# Use the MyList class
+# Import the MyList class from the module "1-my_list"
+>>> MyList = __import__("1-my_list").MyList
+
+# Test case 1: Testing with a list of random numbers
 >>> my_list = MyList()
->>> len(my_list)
-0
-
-# Append elements to MyList
->>> my_list.append(1)
 >>> my_list.append(4)
->>> my_list.append(2)
->>> my_list.append(3)
 >>> my_list.append(5)
->>> len(my_list)
-5
-
-# Print the original list
->>> my_list
-[1, 4, 2, 3, 5]
-
-# Print the sorted list using the print_sorted method
->>> my_list.print_sorted()
+>>> my_list.append(3)
+>>> my_list.append(1)
+>>> my_list.append(2)
+>>> print(my_list)  # Check if the list is correctly populated
+[4, 5, 3, 1, 2]
+>>> my_list.print_sorted()  # Check if the list can be printed in sorted order
 [1, 2, 3, 4, 5]
+>>> print(my_list)  # Ensure the original list remains unchanged
+[4, 5, 3, 1, 2]
 
-# Verify that the original list remains unchanged
->>> my_list
-[1, 4, 2, 3, 5]
+# Test case 2: Testing with negative numbers in an empty list
+>>> my_list = MyList()
+>>> my_list.append(-1)
+>>> my_list.append(-5)
+>>> print(my_list)  # Check if the list contains negative numbers
+[-1, -5]
+>>> my_list.print_sorted()  # Check if the list can be printed in sorted order
+[-5, -1]
+>>> print(my_list)  # Ensure the original list remains unchanged
+[-1, -5]
 
-# Test sorting an empty MyList
->>> empty_list = MyList()
->>> empty_list.print_sorted()
+# Test case 3: Testing an empty list
+>>> my_list = MyList()
+>>> print(my_list)  # Check if an empty list is displayed correctly
+[]
+>>> my_list.print_sorted()  # Check if an empty list can be printed in sorted order
+[]
+>>> print(my_list)  # Ensure the original empty list remains unchanged
 []
 
-# Test sorting a MyList with a single element
->>> single_element_list = MyList()
->>> single_element_list.append(10)
->>> single_element_list.print_sorted()
-[10]
+# Test case 4: Testing for duplicate items in the list
+>>> my_list = MyList()
+>>> my_list.append(5)
+>>> my_list.append(5)
+>>> print(my_list)  # Check if duplicate items are added to the list
+[5, 5]
+>>> my_list.print_sorted()  # Check if the list can be printed in sorted order
+[5, 5]
+>>> print(my_list)  # Ensure the original list with duplicates remains unchanged
+[5, 5]
