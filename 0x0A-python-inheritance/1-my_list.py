@@ -11,9 +11,3 @@ class MyList(list):
         Module to sort a list
         """
         print(sorted(self.copy()))
-        """
-        => This is another solution for:
-        new_list = list.copy(self)
-        list.sort(new_list)
-        print(new_list)
-        """

@@ -3,9 +3,11 @@
 This module defines geometric classes for calculating areas.
 """
 
+
 class GeometryError(Exception):
     """Custom exception for geometry errors"""
     pass
+
 
 class BaseGeometry:
     """Base class for geometry"""
@@ -17,6 +19,7 @@ class BaseGeometry:
         """Validate that a value is a positive integer."""
         if not isinstance(value, int) or value <= 0:
             raise ValueError(f"{name} must be a positive integer.")
+
 
 class Rectangle(BaseGeometry):
     """Class representing a rectangle."""
@@ -33,6 +36,7 @@ class Rectangle(BaseGeometry):
     def __str__(self):
         return f"[Rectangle] {self._width}/{self._height}"
 
+
 class Square(Rectangle):
     """Class representing a square (a special rectangle)."""
     def __init__(self, size):
@@ -41,6 +45,7 @@ class Square(Rectangle):
 
     def __str__(self):
         return f"[Square] {self._size}/{self._size}"
+
 
 if __name__ == "__main__":
     r = Rectangle(3, 5)
