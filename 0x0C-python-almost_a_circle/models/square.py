@@ -2,6 +2,7 @@
 """Square module"""
 from models.rectangle import Rectangle
 
+
 class Square(Rectangle):
     """Square class inherits from Rectangle."""
 
@@ -53,7 +54,7 @@ class Square(Rectangle):
         """Return the dictionary rep of a Square"""
         square_dict = {
             "id": self.id,
-            "size": self.width, 
+            "size": self.width,
             "x": self.x,
             "y": self.y
         }

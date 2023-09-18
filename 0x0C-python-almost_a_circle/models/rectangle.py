@@ -2,6 +2,7 @@
 """Rectangle module"""
 from models.base import Base
 
+
 class Rectangle(Base):
     """Rectangle class inherits from Base."""
 
@@ -88,7 +89,7 @@ class Rectangle(Base):
     def area(self):
         """Calculate and return the area of the rectangle"""
         return self.__width * self.__height
-    
+
     def display(self):
         """Print the rectangle instance with '#' characters"""
         for _ in range(self.__y):
@@ -98,8 +99,12 @@ class Rectangle(Base):
 
     def __str__(self):
         """Return a string rep of a rectangle"""
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
-    
+        return (
+                f"[Rectangle] ({self.id}) "
+                f"{self.__x}/{self.__y} - "
+                f"{self.__width}/{self.__height}"
+        )
+
     def update(self, *args, **kwargs):
         """Assign arguments or keyword arguments to attributes."""
         attr_names = ['id', 'width', 'height', 'x', 'y']
