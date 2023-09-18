@@ -99,3 +99,9 @@ class Rectangle(Base):
     def __str__(self):
         """Return a string rep of a rectangle"""
         return "[Rectabgle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
+    
+    def update(self, *args):
+        """Assign arguments to attributes in the specified order."""
+        attr_names = ['id', 'width', 'height', 'x', 'y']
+        for i, arg in enumerate(args):
+            setattr(self, attr_names[i], arg)
