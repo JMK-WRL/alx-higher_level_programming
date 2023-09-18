@@ -22,14 +22,12 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s.area(), 25)
 
     def test_square_display(self):
-        """Test the display() method of the Square class"""
+       """Test the display() method of the Square class"""
         s = Square(3, 1, 1)
-        expected_output = " ###\n" \
-                          " ###\n" \
-                          " ###\n"
+        expected_output = ' ###\n ###\n ###\n'  # Remove the leading newline character
         with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             s.display()
-            self.assertEqual(mock_stdout.getvalue(), expected_output)
+            self.assertEqual(mock_stdout.getvalue(), expected_output
 
     def test_square_str(self):
         """Test the __str__() method of the Square class"""

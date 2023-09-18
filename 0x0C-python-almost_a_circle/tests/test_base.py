@@ -43,6 +43,7 @@ class TestBase(unittest.TestCase):
             json_string = file.read()
             expected_json = '[{"x": 2, "y": 8, "id": 1, "height": 7, "width": 10}, {"x": 0, "y": 0, "id": 2, "height": 4, "width": 2}]'
             self.assertEqual(json_string, expected_json)
+       
 
     def test_load_from_file(self):
         """Test the load_from_file method"""
