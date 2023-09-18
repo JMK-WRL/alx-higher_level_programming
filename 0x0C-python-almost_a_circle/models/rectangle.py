@@ -98,7 +98,7 @@ class Rectangle(Base):
 
     def __str__(self):
         """Return a string rep of a rectangle"""
-        return "[Rectabgle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
     
     def update(self, *args, **kwargs):
         """Assign arguments or keyword arguments to attributes."""
@@ -109,3 +109,12 @@ class Rectangle(Base):
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """Return a dic rep of the rectangle"""
+        return {
+            'id': self.__width,
+            'width': self.__height,
+            'x': self.__x,
+            'y': self.__y
+        }
