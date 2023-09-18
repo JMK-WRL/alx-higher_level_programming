@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-"""Class base"""
-
 import json
 
 class Base:
@@ -81,12 +79,36 @@ class Base:
         Returns:
             Base: An instance with the attributes set.
         """
-        if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        elif cls.__name__ == "Square":
-            dummy = cls(1)
+        if cls.__name__ == "Base":
+            dummy = cls()
+        else:
+            dummy = cls(1)  # Use 1 as a default ID for subclasses
         dummy.update(**dictionary)
         return dummy
+    
+    def update(self, *args, **kwargs):
+        """
+        Update instance attribute based on arguments
+
+        Args:
+            *args: variable length
+            **kwargs: keyword
+        """
+        if args:
+            attr_names = ['id']
+            for arg in args:
+                for key, value in arg.items():
+                    setattr(self, key, value)
+                    if key not in attr_names:
+                        attr_names.append(key)
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
+    def to_dictionary(self):
+        """converts instance attributes to a dict"""
+        return {key: getattr(self, key) for key in vars(self)}
+
 
     @classmethod
     def load_from_file(cls):

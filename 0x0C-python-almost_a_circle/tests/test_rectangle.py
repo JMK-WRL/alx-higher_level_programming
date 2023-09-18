@@ -1,87 +1,70 @@
-#!/usr/bin/python3
 import unittest
-import json
-import inspect
+from models.rectangle import Rectangle
 
-from models.base import Base
-from models.square import Square
+class TestRectangle(unittest.TestCase):
+    """
+    A unittest class for testing the Rectangle class.
+    """
 
+    def setUp(self):
+        """
+        Set up a Rectangle instance for testing.
+        """
+        self.rectangle = Rectangle(4, 5, 2, 3, 1)
 
-class TestBase(unittest.TestCase):
+    def test_attributes(self):
+        """
+        Test if the attributes of the Rectangle instance are set correctly.
+        """
+        self.assertEqual(self.rectangle.width, 4)
+        self.assertEqual(self.rectangle.height, 5)
+        self.assertEqual(self.rectangle.x, 2)
+        self.assertEqual(self.rectangle.y, 3)
+        self.assertEqual(self.rectangle.id, 1)
 
-    def test_id_none(self):
-        b = Base()
-        self.assertEqual(1, b.id)
+    def test_area(self):
+        """
+        Test the area method of the Rectangle.
+        """
+        self.assertEqual(self.rectangle.area(), 20)
 
-    def test_id(self):
-        b = Base(50)
-        self.assertEqual(50, b.id)
+    def test_display(self):
+        """
+        Test the display method of the Rectangle.
+        """
+        expected_output = "\n" * 3 + "  ####\n" + "  ####\n" + "  ####\n" + "  ####\n" + "  ####\n"
+        self.assertEqual(self.rectangle.display(), expected_output)
 
-    def test_id_zero(self):
-        b = Base(0)
-        self.assertEqual(0, b.id)
+    def test_str(self):
+        """
+        Test the string representation of the Rectangle.
+        """
+        expected_str = "[Rectangle] (1) 2/3 - 4/5"
+        self.assertEqual(str(self.rectangle), expected_str)
 
-    def test_id_negative(self):
-        b = Base(-20)
-        self.assertEqual(-20, b.id)
+    def test_update(self):
+        """
+        Test the update method of the Rectangle.
+        """
+        self.rectangle.update(2, 6, 7, 8, 9, id=10)
+        self.assertEqual(self.rectangle.id, 2)
+        self.assertEqual(self.rectangle.width, 6)
+        self.assertEqual(self.rectangle.height, 7)
+        self.assertEqual(self.rectangle.x, 8)
+        self.assertEqual(self.rectangle.y, 9)
 
-    def test_id_string(self):
-        b = Base("Betty")
-        self.assertEqual("Betty", b.id)
-
-    def test_id_list(self):
-        b = Base([1, 2, 3])
-        self.assertEqual([1, 2, 3], b.id)
-
-    def test_id_dict(self):
-        b = Base({"id": 109})
-        self.assertEqual({"id": 109}, b.id)
-
-    def test_id_tuple(self):
-        b = Base((8,))
-        self.assertEqual((8,), b.id)
-
-    def test_to_json_type(self):
-        sq = Square(1)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(type(json_string), str)
-
-    def test_to_json_value(self):
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(json.loads(json_string), [{"id": 609, "y": 0, "size": 1, "x": 0}])
-
-    def test_to_json_None(self):
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string(None)
-        self.assertEqual(json_string, "[]")
-
-    def test_to_json_Empty(self):
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([])
-        self.assertEqual(json_string, "[]")
-
-
-class TestSquare(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.setup = inspect.getmembers(Base, inspect.isfunction)
-
-    def test_module_docstring(self):
-        self.assertTrue(len(Base.__doc__) >= 1)
-
-    def test_class_docstring(self):
-        self.assertTrue(len(Base.__doc__) >= 1)
-
-    def test_func_docstrings(self):
-        for func in self.setup:
-            self.assertTrue(len(func[1].__doc__) >= 1)
-
+    def test_to_dictionary(self):
+        """
+        Test the to_dictionary method of the Rectangle.
+        """
+        expected_dict = {
+            'id': 1,
+            'width': 4,
+            'height': 5,
+            'x': 2,
+            'y': 3
+        }
+        self.assertEqual(self.rectangle.to_dictionary(), expected_dict)
 
 if __name__ == '__main__':
     unittest.main()
