@@ -2,6 +2,7 @@
 """Base Module"""
 import json
 
+
 class Base:
     """Base class to manage IDs for other classes in the project."""
 
@@ -12,8 +13,7 @@ class Base:
         Constructor for the Base class.
 
         Args:
-            id (int, optional): An integer ID for the instance. If provided, it will be assigned as the ID.
-                If not provided, a new ID will be generated automatically.
+            id (int, optional): An integer ID for the instance.
         """
         if id is not None:
             self.id = id
@@ -27,7 +27,7 @@ class Base:
         Convert a list of dictionaries to a JSON string representation.
 
         Args:
-            list_dictionaries (list): A list of dictionaries to be converted to JSON.
+            list_dictionaries (list): A list of dictionaries to convert.
 
         Returns:
             str: JSON string representation of the list of dictionaries.
@@ -65,7 +65,7 @@ class Base:
         if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
-    
+
     @classmethod
     def create(cls, **dictionary):
         """Create and return an instnce with attribute set using a dic"""
@@ -80,7 +80,7 @@ class Base:
     def load_from_file(cls):
         """
         Load a list of instances from a JSON file
-            
+
         Returns:
             list: a list of instaces
         """
