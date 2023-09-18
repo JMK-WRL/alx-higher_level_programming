@@ -1,68 +1,76 @@
 #!/usr/bin/python3
-"""
-Unit tests for the Base class.
-
-Unittest classes:
-    TestBaseInstantiation - line 21
-    TestBaseToJsonString - line 108
-    TestBaseSaveToFile - line 154
-    TestBaseFromJsonString - line 232
-    TestBaseCreate - line 286
-    TestBaseLoadFromFile - line 338
-    TestBaseSaveToFileCSV - line 404
-    TestBaseLoadFromFileCSV - line 482
-"""
-
-import os
 import unittest
 from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
 
-class TestBaseInstantiation(unittest.TestCase):
-    """Unit tests for testing instantiation of the Base class."""
+class TestBase(unittest.TestCase):
 
-    def test_no_arg(self):
+    def test_init(self):
+        # Test that instances have unique IDs
         base1 = Base()
         base2 = Base()
-        self.assertEqual(base1.id, base2.id - 1)
+        self.assertNotEqual(base1.id, base2.id)
 
-    # Add more test cases for Base instantiation here
+        # Test that instances have the correct ID when provided
+        base3 = Base(100)
+        self.assertEqual(base3.id, 100)
 
-class TestBaseToJsonString(unittest.TestCase):
-    """Unit tests for testing to_json_string method of Base class."""
+    def test_to_json_string(self):
+        # Test when the input list is empty
+        self.assertEqual(Base.to_json_string([]), "[]")
 
-    # Add test cases for to_json_string method here
+        # Test when the input list is not empty
+        data = [{'key': 'value'}, {'key2': 'value2'}]
+        json_string = Base.to_json_string(data)
+        self.assertEqual(json_string, '[{"key": "value"}, {"key2": "value2"}]')
 
-class TestBaseSaveToFile(unittest.TestCase):
-    """Unit tests for testing save_to_file method of Base class."""
+    def test_save_to_file(self):
+        # Test saving an empty list
+        Base.save_to_file([])
+        with open('Base.json', 'r') as file:
+            self.assertEqual(file.read(), '[]')
 
-    # Add test cases for save_to_file method here
+        # Test saving a list of dictionaries
+        data = [{'key': 'value'}, {'key2': 'value2'}]
+        Base.save_to_file(data)
+        with open('Base.json', 'r') as file:
+            self.assertEqual(file.read(), '[{"key": "value"}, {"key2": "value2"}]')
 
-class TestBaseFromJsonString(unittest.TestCase):
-    """Unit tests for testing from_json_string method of Base class."""
+    def test_from_json_string(self):
+        # Test when the input JSON string is empty
+        self.assertEqual(Base.from_json_string(""), [])
 
-    # Add test cases for from_json_string method here
+        # Test when the input JSON string is not empty
+        json_string = '[{"key": "value"}, {"key2": "value2"}]'
+        data = Base.from_json_string(json_string)
+        self.assertEqual(data, [{'key': 'value'}, {'key2': 'value2'}])
 
-class TestBaseCreate(unittest.TestCase):
-    """Unit tests for testing create method of Base class."""
+    def test_create(self):
+        # Test creating a Rectangle instance from a dictionary
+        rectangle_dict = {'id': 1, 'width': 2, 'height': 3, 'x': 4, 'y': 5}
+        rectangle = Base.create(**rectangle_dict)
+        self.assertEqual(rectangle.id, 1)
+        self.assertEqual(rectangle.width, 2)
+        self.assertEqual(rectangle.height, 3)
+        self.assertEqual(rectangle.x, 4)
+        self.assertEqual(rectangle.y, 5)
 
-    # Add test cases for create method here
+        # Test creating a Square instance from a dictionary
+        square_dict = {'id': 6, 'size': 7, 'x': 8, 'y': 9}
+        square = Base.create(**square_dict)
+        self.assertEqual(square.id, 6)
+        self.assertEqual(square.size, 7)
+        self.assertEqual(square.x, 8)
+        self.assertEqual(square.y, 9)
 
-class TestBaseLoadFromFile(unittest.TestCase):
-    """Unit tests for testing load_from_file method of Base class."""
+    def test_load_from_file(self):
+        # Test loading from a non-existent file
+        self.assertEqual(Base.load_from_file(), [])
 
-    # Add test cases for load_from_file method here
+        # Test loading from an existing file
+        data = [{'key': 'value'}, {'key2': 'value2'}]
+        Base.save_to_file(data)
+        loaded_data = Base.load_from_file()
+        self.assertEqual(loaded_data, data)
 
-class TestBaseSaveToFileCSV(unittest.TestCase):
-    """Unit tests for testing save_to_file_csv method of Base class."""
-
-    # Add test cases for save_to_file_csv method here
-
-class TestBaseLoadFromFileCSV(unittest.TestCase):
-    """Unit tests for testing load_from_file_csv method of Base class."""
-
-    # Add test cases for load_from_file_csv method here
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

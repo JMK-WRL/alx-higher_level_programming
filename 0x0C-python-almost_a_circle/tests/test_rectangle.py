@@ -1,60 +1,87 @@
 #!/usr/bin/python3
-"""Unit tests for Rectangle class"""
-
 import unittest
-import unittest.mock
-import io
-from models.rectangle import Rectangle
+import json
+import inspect
+
+from models.base import Base
+from models.square import Square
 
 
-class TestRectangle(unittest.TestCase):
-    def test_rectangle_attributes(self):
-        """Test the attributes of the Rectangle class"""
-        r = Rectangle(10, 20, 30, 40, 1)
-        self.assertEqual(r.width, 10)
-        self.assertEqual(r.height, 20)
-        self.assertEqual(r.x, 30)
-        self.assertEqual(r.y, 40)
-        self.assertEqual(r.id, 1)
+class TestBase(unittest.TestCase):
 
-    def test_rectangle_area(self):
-        """Test the area() method of the Rectangle class"""
-        r = Rectangle(5, 10)
-        self.assertEqual(r.area(), 50)
+    def test_id_none(self):
+        b = Base()
+        self.assertEqual(1, b.id)
 
-    def test_rectangle_display(self):
-        """Test the display() method of the Rectangle class"""
-        r = Rectangle(3, 2)
-        expected_output = "###\n" \
-                          "###\n"
-        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
-            r.display()
-            self.assertEqual(mock_stdout.getvalue(), expected_output)
+    def test_id(self):
+        b = Base(50)
+        self.assertEqual(50, b.id)
 
-    def test_rectangle_str(self):
-        """Test the __str__() method of the Rectangle class"""
-        r = Rectangle(5, 10, 15, 20, 25)
-        self.assertEqual(str(r), "[Rectangle] (25) 15/20 - 5/10")
+    def test_id_zero(self):
+        b = Base(0)
+        self.assertEqual(0, b.id)
 
-    def test_rectangle_update_args(self):
-        """Test the update() method with positional arguments"""
-        r = Rectangle(1, 1, 0, 0, 1)
-        r.update(2, 2, 2, 2, 2)
-        self.assertEqual(str(r), "[Rectangle] (2) 2/2 - 2/2")
+    def test_id_negative(self):
+        b = Base(-20)
+        self.assertEqual(-20, b.id)
 
-    def test_rectangle_update_kwargs(self):
-        """Test the update() method with keyword arguments"""
-        r = Rectangle(1, 1, 0, 0, 1)
-        r.update(id=2, width=2, height=2, x=2, y=2)
-        self.assertEqual(str(r), "[Rectangle] (2) 2/2 - 2/2")
+    def test_id_string(self):
+        b = Base("Betty")
+        self.assertEqual("Betty", b.id)
 
-    def test_rectangle_to_dictionary(self):
-        """Test the to_dictionary() method of the Rectangle class"""
-        r = Rectangle(5, 10, 15, 20, 25)
-        expected_dict = {'id': 25, 'width': 5, 'height': 10, 'x': 15, 'y': 20}
-        self.assertEqual(r.to_dictionary(), expected_dict)
+    def test_id_list(self):
+        b = Base([1, 2, 3])
+        self.assertEqual([1, 2, 3], b.id)
+
+    def test_id_dict(self):
+        b = Base({"id": 109})
+        self.assertEqual({"id": 109}, b.id)
+
+    def test_id_tuple(self):
+        b = Base((8,))
+        self.assertEqual((8,), b.id)
+
+    def test_to_json_type(self):
+        sq = Square(1)
+        json_dict = sq.to_dictionary()
+        json_string = Base.to_json_string([json_dict])
+        self.assertEqual(type(json_string), str)
+
+    def test_to_json_value(self):
+        sq = Square(1, 0, 0, 609)
+        json_dict = sq.to_dictionary()
+        json_string = Base.to_json_string([json_dict])
+        self.assertEqual(json.loads(json_string), [{"id": 609, "y": 0, "size": 1, "x": 0}])
+
+    def test_to_json_None(self):
+        sq = Square(1, 0, 0, 609)
+        json_dict = sq.to_dictionary()
+        json_string = Base.to_json_string(None)
+        self.assertEqual(json_string, "[]")
+
+    def test_to_json_Empty(self):
+        sq = Square(1, 0, 0, 609)
+        json_dict = sq.to_dictionary()
+        json_string = Base.to_json_string([])
+        self.assertEqual(json_string, "[]")
+
+
+class TestSquare(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.setup = inspect.getmembers(Base, inspect.isfunction)
+
+    def test_module_docstring(self):
+        self.assertTrue(len(Base.__doc__) >= 1)
+
+    def test_class_docstring(self):
+        self.assertTrue(len(Base.__doc__) >= 1)
+
+    def test_func_docstrings(self):
+        for func in self.setup:
+            self.assertTrue(len(func[1].__doc__) >= 1)
 
 
 if __name__ == '__main__':
     unittest.main()
-
