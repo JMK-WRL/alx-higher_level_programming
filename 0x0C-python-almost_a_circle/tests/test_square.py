@@ -1,58 +1,137 @@
 #!/usr/bin/python3
-"""Unit tests for Square class"""
+"""Unittest square.
+Test cases for the Square class.
+Each test has the number of the task,
+and the number of the test for that task
+(i.e 'test_17_0' for the first test of task 17)
+"""
 
 import unittest
-import unittest.mock
 import io
+import contextlib
+from models.base import Base
+from models.rectangle import Rectangle
 from models.square import Square
 
-
 class TestSquare(unittest.TestCase):
-    def test_square_attributes(self):
-        """Test the attributes of the Square class"""
-        s = Square(5, 2, 3, 1)
-        self.assertEqual(s.size, 5)
-        self.assertEqual(s.x, 2)
-        self.assertEqual(s.y, 3)
-        self.assertEqual(s.id, 1)
+    """Test class for Square class."""
 
-    def test_square_area(self):
-        """Test the area() method of the Square class"""
-        s = Square(5, 2, 3, 1)
-        self.assertEqual(s.area(), 25)
+    def setUp(self):
+        Base._Base__nb_objects = 0
 
-    def test_square_display(self):
-       """Test the display() method of the Square class"""
-        s = Square(3, 1, 1)
-        expected_output = ' ###\n ###\n ###\n'  # Remove the leading newline character
-        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
-            s.display()
-            self.assertEqual(mock_stdout.getvalue(), expected_output
+    def test_10_0(self):
+        """Test Square class: check for attributes."""
 
-    def test_square_str(self):
-        """Test the __str__() method of the Square class"""
-        s = Square(5, 2, 3, 1)
-        self.assertEqual(str(s), "[Square] (1) 2/3 - 5")
+        s0 = Square(1)
+        self.assertEqual(s0.id, 1)
+        s1 = Square(5, 3, 4)
+        self.assertEqual(s1.height, 5)
+        self.assertEqual(s1.width, 5)
+        self.assertEqual(s1.x, 3)
+        self.assertEqual(s1.y, 4)
+        self.assertEqual(s1.id, 2)
 
-    def test_square_update_args(self):
-        """Test the update() method with positional arguments"""
-        s = Square(5, 2, 3, 1)
-        s.update(2, 4, 5, 6)
-        self.assertEqual(str(s), "[Square] (2) 5/6 - 4")
+    def test_10_1(self):
+        """Test __str__ representation."""
 
-    def test_square_update_kwargs(self):
-        """Test the update() method with keyword arguments"""
-        s = Square(5, 2, 3, 1)
-        s.update(id=2, size=4, x=5, y=6)
-        self.assertEqual(str(s), "[Square] (2) 5/6 - 4")
+        s1 = Square(9, 4, 5, 6)
+        self.assertEqual(str(s1), "[Square] (6) 4/5 - 9")
 
-    def test_square_to_dictionary(self):
-        """Test the to_dictionary() method of the Square class"""
-        s = Square(5, 2, 3, 1)
-        expected_dict = {'id': 1, 'size': 5, 'x': 2, 'y': 3}
-        self.assertEqual(s.to_dictionary(), expected_dict)
+    def test_10_2(self):
+        """Test Square class: check for inheritance."""
 
+        s1 = Square(6)
+        self.assertTrue(isinstance(s1, Rectangle))
+        self.assertTrue(issubclass(Square, Rectangle))
+        self.assertFalse(isinstance(Square, Rectangle))
+        self.assertTrue(isinstance(s1, Base))
+        self.assertTrue(issubclass(Square, Base))
+        self.assertFalse(isinstance(Square, Base))
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_10_4(self):
+        """Test Square for methods inherited from Rectangle."""
 
+        s1 = Square(9)
+        self.assertEqual(s1.area(), 81)
+        s2 = Square(4, 1, 2, 5)
+        s2.update(7)
+        self.assertEqual(s2.id, 7)
+        f = io.StringIO()
+        s3 = Square(4)
+        with contextlib.redirect_stdout(f):
+            s3.display()
+        s = f.getvalue()
+        res = "####\n####\n####\n####\n"
+        self.assertEqual(s, res)
+
+    def test_11_0(self):
+        """Test Square class: check for size attribute."""
+
+        s1 = Square(8)
+        self.assertEqual(s1.size, 8)
+        s2 = Square(9, 8, 7, 2)
+        self.assertEqual(s2.size, 9)
+
+    def test_11_1(self):
+        """Test Square class: check for wrong attributes."""
+
+        with self.assertRaises(TypeError) as x:
+            s = Square("Hello", 2)
+        self.assertEqual("width must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            s = Square(2, "World")
+        self.assertEqual("x must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            s = Square(1, 2, "Foo", 3)
+        self.assertEqual("y must be an integer", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            s = Square(0, 2)
+        self.assertEqual("width must be > 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            s = Square(-1)
+        self.assertEqual("width must be > 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            s = Square(2, -3)
+        self.assertEqual("x must be >= 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            s = Square(2, 5, -5, 6)
+        self.assertEqual("y must be >= 0", str(x.exception))
+
+    def test_12_0(self):
+        """Test update method on Square."""
+
+        s1 = Square(5)
+        s1.update(10)
+        self.assertEqual(s1.id, 10)
+        s1.update(x=12)
+        self.assertEqual(s1.x, 12)
+        s1.update(size=7, id=89, y=1)
+        self.assertEqual(s1.size, 7)
+        self.assertEqual(s1.id, 89)
+        self.assertEqual(s1.y, 1)
+        s1.update()
+        self.assertEqual(s1.size, 7)
+        self.assertEqual(s1.id, 89)
+        self.assertEqual(s1.y, 1)
+
+    def test_12_1(self):
+        """Test for update method on Square with wrong types."""
+
+        s1 = Square(9)
+        with self.assertRaises(TypeError) as x:
+            s1.update(2, 3, 4, "hello")
+        self.assertEqual("y must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            s1.update("hello", 8, 9)
+        self.assertEqual("id must be an integer", str(x.exception))
+
+    def test_14_0(self):
+        """Test for public method to_dictionary."""
+
+        s1 = Square(10, 2, 1)
+        s1_dictionary = s1.to_dictionary()
+        s_dictionary = {'x': 2, 'y': 1, 'id': 1, 'size': 10}
+        self.assertEqual(len(s1_dictionary), len(s_dictionary))
+        self.assertEqual(type(s1_dictionary), dict)
+        s2 = Square(1, 1)
+        s2.update(**s1

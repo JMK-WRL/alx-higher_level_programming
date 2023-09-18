@@ -56,19 +56,21 @@ class Base:
     @staticmethod
     def from_json_string(json_string):
         """
-        Converts JSON stringtoa list of dic
+        Converts JSON string to a list of dictionaries.
 
         Args:
-            json_string(str): A json string rep a list of dic
-        """
+            json_string(str): A json string representing a list of dictionaries.
 
+        Returns:
+            list: A list of dictionaries.
+        """
         if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
-        """Create and return an instnce with attribute set using a dic"""
+        """Create and return an instance with attributes set using a dictionary."""
         if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
         elif cls.__name__ == "Square":
@@ -79,10 +81,10 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """
-        Load a list of instances from a JSON file
+        Load a list of instances from a JSON file.
 
         Returns:
-            list: a list of instaces
+            list: A list of instances.
         """
         filename = cls.__name__ + ".json"
 
