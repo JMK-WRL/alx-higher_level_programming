@@ -30,7 +30,7 @@ class Base:
         Returns:
             str: JSON string representation of the list of dictionaries.
         """
-        if list_dictionaries is None or len(list_dictionaries) == 0:
+        if list_dictionaries is None:
             return "[]"
         return json.dumps(list_dictionaries)
 
