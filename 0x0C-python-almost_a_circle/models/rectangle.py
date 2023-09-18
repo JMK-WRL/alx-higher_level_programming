@@ -113,8 +113,9 @@ class Rectangle(Base):
     def to_dictionary(self):
         """Return a dic rep of the rectangle"""
         return {
-            'id': self.__width,
-            'width': self.__height,
+            'id': self.id,
+            'width': self.__width,
+            'height': self.__height,
             'x': self.__x,
             'y': self.__y
         }
