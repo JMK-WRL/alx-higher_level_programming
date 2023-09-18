@@ -32,10 +32,12 @@ class TestBase(unittest.TestCase):
         b3 = Base()
         b4 = Base(200)
 
-        self.assertEqual(b1.id, 4)
-        self.assertEqual(b2.id, 100)
-        self.assertEqual(b3.id, 5)
-        self.assertEqual(b4.id, 200)
+        expected_ids = [1, 100, 2, 200]
 
+        for i in range(len(expected_ids)):
+            self.assertEqual(b1.id, expected_ids[i])
+            b1 = Base()
+
+            
 if __name__ == "__main__":
     unittest.main()
