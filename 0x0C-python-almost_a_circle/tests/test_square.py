@@ -2,6 +2,8 @@
 """Unit tests for Square class"""
 
 import unittest
+import unittest.mock
+import io
 from models.square import Square
 
 
