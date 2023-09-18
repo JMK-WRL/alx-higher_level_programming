@@ -93,3 +93,7 @@ class Rectangle(Base):
         """Print the Rectangle isntance with '#' characters"""
         for i in range(self.__height):
             print('#' * self.__width)
+
+    def __str__(self):
+        """Return a string rep of a rectangle"""
+        return "[Rectabgle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
