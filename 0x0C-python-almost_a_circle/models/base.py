@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 import json
 
+
 class Base:
     """Base class to manage IDs for other classes in the project."""
 
-    __nb_objects = 0  
+    __nb_objects = 0
 
     def __init__(self, id=None):
         """
         Constructor for the Base class.
 
         Args:
-            id (int, optional): An integer ID for the instance. If provided, it will be assigned as the ID.
-                If not provided, a new ID will be generated automatically.
+            id (int, optional): An integer ID for the instance............
         """
         if id is not None:
             self.id = id
@@ -59,7 +59,7 @@ class Base:
         Convert a JSON string to a list of dictionaries.
 
         Args:
-            json_string (str): A JSON string representing a list of dictionaries.
+            json_string (str): A JSON string rep.
 
         Returns:
             list: A list of dictionaries.
@@ -85,7 +85,7 @@ class Base:
             dummy = cls(1)  # Use 1 as a default ID for subclasses
         dummy.update(**dictionary)
         return dummy
-    
+
     def update(self, *args, **kwargs):
         """
         Update instance attribute based on arguments
@@ -108,7 +108,6 @@ class Base:
     def to_dictionary(self):
         """converts instance attributes to a dict"""
         return {key: getattr(self, key) for key in vars(self)}
-
 
     @classmethod
     def load_from_file(cls):
