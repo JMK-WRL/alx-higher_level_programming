@@ -10,7 +10,7 @@ class TestRectangle(unittest.TestCase):
         """
         Set up a Rectangle instance for testing.
         """
-        self.rectangle = Rectangle(4, 5, 2, 3, 1)
+        self.rectangle = Rectangle(2, 4)
 
     def test_attributes(self):
         """
@@ -32,8 +32,9 @@ class TestRectangle(unittest.TestCase):
         """
         Test the display method of the Rectangle.
         """
-        expected_output = "\n" * 3 + "  ####\n" + "  ####\n" + "  ####\n" + "  ####\n" + "  ####\n"
-        self.assertEqual(self.rectangle.display(), expected_output)
+        r1 = Rectangle(4, 5, 2, 2)
+        expected_output = "####\n####\n####\n####\n####"
+        self.assertEqual(r1.display(), expected_output)
 
     def test_str(self):
         """

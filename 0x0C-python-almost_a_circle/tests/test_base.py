@@ -12,7 +12,7 @@ class TestBase(unittest.TestCase):
         """
         Set up a Base instance for testing.
         """
-        self.base_instance = Base()
+        self.instances = Base()
 
     def tearDown(self):
         """
@@ -42,10 +42,10 @@ class TestBase(unittest.TestCase):
         """
         dict_list = [{'id': 1, 'name': 'Alice'}, {'id': 2, 'name': 'Bob'}]
         isinstances = [Base.create(**d) for d in dict_list]
-        Base.save_to_file(dict_list)
+        Base.save_to_file([self.base_instance])
         with open("Base.json", mode="r", encoding="utf-8") as file:
             saved_json_string = file.read()
-        self.assertEqual(saved_json_string, json.dumps(dict_list))
+        self.assertEqual(saved_json_string, Base.to_json_string([obj.to_dictionary() for obj in instances]))
 
     def test_from_json_string(self):
         """
@@ -70,7 +70,7 @@ class TestBase(unittest.TestCase):
         """
         dict_list = [{'id': 1, 'name': 'Alice'}, {'id': 2, 'name': 'Bob'}]
         isinstances = [Base.create(**d) for d in dict_list]
-        Base.save_to_file(dict_list)
+        Base.save_to_file(instances)
         loaded_instances = Base.load_from_file()
         self.assertEqual(len(loaded_instances), 2)
         self.assertEqual(loaded_instances[0].id, 1)

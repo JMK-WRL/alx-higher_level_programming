@@ -6,7 +6,7 @@ class TestSquare(unittest.TestCase):
 
     def setUp(self):
         """Set up a Square instance for testing."""
-        self.square = Square(5, 2, 3, 1)
+        self.square = Square(3)
 
     def test_attributes(self):
         """Test if the attributes of the Square instance are set correctly."""
