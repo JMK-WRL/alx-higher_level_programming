@@ -72,20 +72,22 @@ class Base:
     @classmethod
     def create(cls, **dictionary):
         """
-        Create an instance with all attributes already set.
+        Create an instance and set its attributes using a dict
 
         Args:
-            dictionary (dict): A dictionary of attributes and their values.
+            **dictionary: a dict containing instances
 
-        Returns:
-            Base: An instance with the attributes set.
         """
-        if cls.__name__ == "Base":
-            dummy = cls()
+        if cls.__name__=="Rectangle":
+            dummy_instance = cls(1, 1)
+        elif cls.__name__=="Square":
+            dummy_instance = cls(1)
         else:
-            dummy = cls(1)  # Use 1 as a default ID for subclasses
-        dummy.update(**dictionary)
-        return dummy
+            return None
+
+        dummy_instance.update(**dictionary)
+        return dummy_instance
+
 
     def update(self, *args, **kwargs):
         """
