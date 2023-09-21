@@ -78,16 +78,15 @@ class Base:
             **dictionary: a dict containing instances
 
         """
-        if cls.__name__=="Rectangle":
+        if cls.__name__ == "Rectangle":
             dummy_instance = cls(1, 1)
-        elif cls.__name__=="Square":
+        elif cls.__name__ == "Square":
             dummy_instance = cls(1)
         else:
             return None
 
         dummy_instance.update(**dictionary)
         return dummy_instance
-
 
     def update(self, *args, **kwargs):
         """
