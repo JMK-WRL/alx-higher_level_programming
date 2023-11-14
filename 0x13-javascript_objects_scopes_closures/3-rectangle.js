@@ -1,20 +1,26 @@
 #!/usr/bin/node
 
 class Rectangle {
-  constructor (w, h) {
-    if (w <= 0 || h <= 0 || !Number.isInteger(w) || !Number.isInteger(h)) {
-      return {};
-    }
+	constructor (w, h) {
+		if (w > 0 && h > 0) {
+			this.width = w;
+			this.height = h;
+		}
+	}
 
-    this.width = w;
-    this.height = h;
-  }
-
-  print () {
-    if (!this.width || !this.height) return;
-
-    for (let i = 0; i < this.height; i++) {
-      console.log('X'.repeat(this.width));
-    }
-  }
+	print () {
+		let x = 0;
+		let y = 0;
+		let widthPrint = '';
+		while (x < this.width) {
+			widthPrint = widthPrint + 'X';
+			x++;
+		}
+		while (y < this.height) {
+			console.log(widthPrint);
+			y++;
+		}
+	}
 }
+
+module.exports = Rectangle;
