@@ -12,9 +12,9 @@ class Square extends square {
 			this.print();
 		} else {
 			let i = 0;
-			while (j < this.width) {
+			while (i < this.width) {
 				console.log(c.repeat(this.width));
-				j++;
+				i++;
 			}
 		}
 	}
