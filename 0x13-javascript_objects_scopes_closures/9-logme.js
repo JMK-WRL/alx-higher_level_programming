@@ -6,4 +6,3 @@ exports.logMe = function (item) {
 	  console.log(`${numArgs}: ${item}`);
 	  numArgs++;
 };
-

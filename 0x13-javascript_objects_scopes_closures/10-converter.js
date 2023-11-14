@@ -11,4 +11,3 @@ exports.converter = function (base) {
 
   return converted;
 };
-
