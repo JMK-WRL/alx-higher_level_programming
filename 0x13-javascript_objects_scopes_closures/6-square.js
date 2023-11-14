@@ -3,7 +3,7 @@
 const SquareBase = require('./5-square');
 
 class SquareWithCharPrint extends SquareBase {
-	charPrint(c0 {
+	charPrint(c) {{
 		if (c === undefined) {
 			c = 'X';
 		}
