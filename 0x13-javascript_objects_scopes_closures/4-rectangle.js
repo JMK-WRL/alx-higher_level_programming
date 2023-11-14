@@ -2,33 +2,36 @@
 
 class Rectangle {
   constructor (w, h) {
-    if (w <= 0 || h <= 0 || !Number.isInteger(w) || !Number.isInteger(h)) {
-      // If w or h is equal to 0 or not a positive integer, create an empty object
-      return {};
+    if (w > 0 && h > 0) {
+      this.width = w;
+      this.height = h;
     }
-
-    this.width = w;
-    this.height = h;
   }
 
   print () {
-    if (!this.width || !this.height) return;
-
-    for (let i = 0; i < this.height; i++) {
-      console.log('X'.repeat(this.width));
+    let x = 0;
+    let y = 0;
+    let widthPrint = '';
+    while (x < this.width) {
+      widthPrint = widthPrint + 'X';
+      x++;
+    }
+    while (y < this.height) {
+      console.log(widthPrint);
+      y++;
     }
   }
 
-  rotate () {
-    if (!this.width || !this.height) return;
-
-    [this.width, this.height] = [this.height, this.width];
+  double () {
+    this.width = this.width * 2;
+    this.height = this.height * 2;
   }
 
-  double () {
-    if (!this.width || !this.height) return;
-
-    this.width *= 2;
-    this.height *= 2;
+  rotate () {
+    const tmp = this.width;
+    this.width = this.height;
+    this.height = tmp;
   }
 }
+
+module.exports = Rectangle;
