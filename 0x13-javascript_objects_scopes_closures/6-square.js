@@ -8,7 +8,7 @@ class SquareWithCharPrint extends SquareBase {
 			c = 'X';
 		}
 
-		for (let i = 0; i < this.size; i++) {
+		for (let x = 0; x < this.size; x++) {
 			console.log(c.repeat(this.size));
 		}
 	}
