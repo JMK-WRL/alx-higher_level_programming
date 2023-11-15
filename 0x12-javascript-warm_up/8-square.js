@@ -6,13 +6,13 @@ let i = 0;
 let j = 0;
 
 if (!isNaN(size)) {
-	for (i; i < size; i++) {
-		let row = '';
-		for (j; j < size; j++) {
-			row += 'X';
-		}
-		console.log(row);
-	}
+  for (i; i < size; i++) {
+    let row = '';
+    for (j; j < size; j++) {
+      row += 'X';
+    }
+    console.log(row);
+  }
 } else {
-	console.log('Missing size');
+  console.log('Missing size');
 }
