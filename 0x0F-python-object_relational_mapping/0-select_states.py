@@ -19,12 +19,6 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    cursor.execute("CREATE DATABASE IF NOT EXISTS hbtn_0e_0_usa")
-
-    cursor.execute("USE hbtn_0e_0_usa")
-
-    cursor.execute("CREATE TABLE IF NOT EXISTS states (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL, PRIMARY KEY (id))")
-
     cursor.execute("SELECR * FROM states ORDER BY id")
 
     rows = cursor.fetchall();
